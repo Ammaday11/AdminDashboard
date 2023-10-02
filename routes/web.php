@@ -24,3 +24,11 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/blank', function () {
     return view('admin.blank');
 });
+
+Route::get('/login', function () {
+    return view('admin.login');
+});
+
+Route::get('/sign-up', function () {
+    return view('admin.sign-up');
+});
