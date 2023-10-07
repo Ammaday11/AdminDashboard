@@ -60,9 +60,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="deliveredAt">Delivered At</label>
-                                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2" />
-                                                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                            <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                                <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" />
+                                                <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
                                                     <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                                                 </div>
                                             </div>

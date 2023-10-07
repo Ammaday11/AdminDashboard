@@ -30,7 +30,10 @@
                                     <div class="card-body">
                                         <div class="d-inline-block">
                                             <h5 class="text-muted">Pending</h5>
-                                            <h2 class="mb-0"> 100</h2>
+                                            @if (count($orders) > 0)
+                                            <h2 class="mb-0"> {{count($orders->where('Status', 'Pending'))}}</h2>
+                                            @endif
+                                            
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-brand-light mt-1">
                                             <i class=" fas fa-clock fa-fw fa-sm text-brand"></i>
@@ -49,7 +52,7 @@
                                     <div class="card-body">
                                         <div class="d-inline-block">
                                             <h5 class="text-muted">Uncleared</h5>
-                                            <h2 class="mb-0">4</h2>
+                                            <h2 class="mb-0"> {{count($orders->where('Status', 'Delivered'))}}</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-secondary-light mt-1">
                                             <i class=" fa fa-exclamation-triangle fa-fw fa-sm text-secondary"></i>
@@ -69,7 +72,7 @@
                                     <div class="card-body">
                                         <div class="d-inline-block">
                                             <h5 class="text-muted">Completed</h5>
-                                            <h2 class="mb-0"> 5</h2>
+                                            <h2 class="mb-0"> {{count($orders->where('Status', 'Completed'))}}</h2>
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-success-light mt-1">
                                             <i class="fas fa-check fa-fw fa-sm text-success"></i>
@@ -88,9 +91,12 @@
                                     <div class="card-body">
                                         <div class="d-inline-block">
                                             <h5 class="text-muted">Total Orders</h5>
-                                            <h2 class="mb-0"> 12</h2>
+                                            <h2 class="mb-0"> {{count($orders)}}</h2>
                                             <h5 class="text-muted">Total Covers</h5>
-                                            <h2 class="mb-0"> 15</h2>
+                                            @if ($totalCovers > 0)
+                                            <h2 class="mb-0">{{$totalCovers}}</h2>
+                                            @endif
+                                            
                                         </div>
                                         <div class="float-right icon-circle-medium  icon-box-lg  bg-info-light mt-1">
                                             <i class="fa fa-eye fa-fw fa-sm text-info"></i>
@@ -109,7 +115,7 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="#" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">New Order</a>
+                                    <a href="{{url('create-order')}}" class="btn btn-info">New Order</a>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -131,8 +137,29 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                {{-- @foreach ($teachers as $teacher) --}}
+                                                @foreach ($orders as $order)
                                                 <tr>
+                                                    <td>{{$order->CheckNo}}</td>
+                                                    <td>{{$order->RoomNo}}</td>
+                                                    <td>{{$order->Cover}}</td>
+                                                    <td>{{$order->created_at}}</td>
+                                                    <td>Order Taker</td>
+                                                    <td>{{$order->Details}}</td>
+                                                    <td>DeliveredBy</td>
+                                                    <td>DeliveredAt</td>
+                                                    <td>ClearedBy</td>
+                                                    <td>ClearedAt</td>
+                                                    <td>{{$order->Status}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-info btn-sm m-r-10 fa fa-eye" data-toggle="modal" data-target="#exampleModal"></a>
+                                                        <a href="#" class="btn btn-brand btn-sm m-r-10 fas fa-edit" data-toggle="modal" data-target="#exampleModal"></a>
+                                                        <a href="#" class="btn btn-danger btn-sm m-r-10 fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                                
+                                                {{-- <tr>
                                                     <td>Test1</td>
                                                     <td>Test2</td>
                                                     <td>Test3</td>
@@ -321,26 +348,7 @@
                                                         <a href="#" class="btn btn-danger btn-sm m-r-10 fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
                                                         
                                                     </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Test1</td>
-                                                    <td>Test2</td>
-                                                    <td>Test3</td>
-                                                    <td>Test4</td>
-                                                    <td>Test5</td>
-                                                    <td>Test6</td>
-                                                    <td>Test7</td>
-                                                    <td>Test8</td>
-                                                    <td>Test9</td>
-                                                    <td>Test10</td>
-                                                    <td>Test11</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-info btn-sm m-r-10 fa fa-eye" data-toggle="modal" data-target="#exampleModal"></a>
-                                                        <a href="#" class="btn btn-brand btn-sm m-r-10 fas fa-edit" data-toggle="modal" data-target="#exampleModal"></a>
-                                                        <a href="#" class="btn btn-danger btn-sm m-r-10 fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
-                                                        
-                                                    </td>
-                                                </tr>
+                                                </tr> --}}
                                             {{-- @endforeach --}}
                                             </tbody>
                                         </table>

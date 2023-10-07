@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+// Route::get('/', function () {
+//     return view('home');
+// });
 
 //Auth::routes();
 
@@ -33,10 +33,15 @@ Route::get('/sign-up', function () {
     return view('admin.sign-up');
 });
 
-Route::get('/new-order', function () {
-    return view('admin.new-order');
-});
+// Route::get('/new-order', function () {
+//     return view('admin.new-order');
+// });
 
-Route::get('/edit-order', function () {
-    return view('admin.edit-order');
-});
+// Route::get('/edit-order', function () {
+//     return view('admin.edit-order');
+// });
+
+//Route::resource('orders', App\Http\Controllers\OrdersController::class);
+
+Route::get('/create-order', [App\Http\Controllers\OrdersController::class, 'create'])->name('create-order');
+Route::get('/', [App\Http\Controllers\OrdersController::class, 'index'])->name('home');
