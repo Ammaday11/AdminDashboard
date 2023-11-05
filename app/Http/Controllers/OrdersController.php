@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Status;
 
 class OrdersController extends Controller
 {
@@ -18,7 +19,8 @@ class OrdersController extends Controller
             $totalCovers += $order->Cover;
         }
 
-        return view('home')->with('orders' , $orders)->with('totalCovers' , $totalCovers);
+        //return view('home')->with('orders' , $orders)->with('totalCovers' , $totalCovers);
+        return view('home', compact('orders' ,'totalCovers'));
     }
 
     /**
@@ -40,9 +42,18 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+
+
+    public function show($id)
     {
-        //
+        $order = Order::find($id);
+        return view('admin.show-order', compact('order'));
+        // $order = Order::where('id' , $id)->get();
+        // return view('admin.show-order')->with('order' , $order);
+    }
+    public function test()
+    {
+        return view('admin.show-order');
     }
 
     /**
@@ -50,9 +61,10 @@ class OrdersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $status = Status::all();
+        $order = Order::find($id);
+        return view('admin.edit-order', compact('order', 'status'));
     }
-
     /**
      * Update the specified resource in storage.
      */

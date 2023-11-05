@@ -23,32 +23,28 @@
                         <!-- ============================================================== -->
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12" style="margin: auto">
                             <div class="card">
-                                <h5 class="card-header">Edit Order</h5>
+                                <h5 class="card-header">Edit Order # {{$order->id}}</h5>
                                 <div class="card-body">
                                     <form action="#" id="basicform" data-parsley-validate="">
                                         <div class="form-group">
                                             <label  for="roomNumber">Check Number</label>
-                                            <input data-parsley-type="number" type="text" required="" placeholder="Enter only numbers" class="form-control">
+                                            <input disabled data-parsley-type="number" type="text" required="" placeholder="{{$order->CheckNo}}" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label  for="roomNumber">Room Number</label>
-                                            <input data-parsley-type="number" type="text" required="" placeholder="Enter only numbers" class="form-control">
+                                            <input disabled  data-parsley-type="number" type="text" required="" placeholder="{{$order->RoomNo}}" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label  for="roomNumber">Cover</label>
-                                            <input data-parsley-type="number" type="text" required="" placeholder="Enter only numbers" class="form-control">
+                                            <input value="{{$order->Cover}}" data-parsley-type="number" type="text" required="" placeholder="Enter only numbers" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="input-select">Order Taken By</label>
-                                            <select class="form-control" id="input-select">
-                                                <option>Person 1</option>
-                                                <option>Person 2</option>
-                                                <option>Person 3</option>
-                                            </select>
+                                            <input disabled data-parsley-type="number" type="text" required="" placeholder="Order Taker" class="form-control">
                                         </div>
                                         <div class="form-group">
                                             <label for="details">Details</label>
-                                                <textarea required="" class="form-control"></textarea>
+                                                <textarea required="" class="form-control">{{$order->Details}}</textarea>
                                         </div>
                                         <div class="form-group">
                                             <label for="input-select">Delivered By</label>
@@ -86,10 +82,15 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="status">Status</label>
-                                            <select class="form-control" id="input-select">
-                                                <option>Pending</option>
-                                                <option>Delivered</option>
-                                                <option>Completed</option>
+                                            <select class="form-control" id="input-select"  value="{{$order->Status}}">
+                                                <option value="">{{$order->Status}}</option>
+                                                @if ($order->Status != "Completed")
+                                                    @foreach($status as $status)
+                                                        @if ($status->Status != $order->Status)
+                                                            <option value="{{ $status->id }}">{{ $status->Status }}</option>
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
 
@@ -100,7 +101,7 @@
                                             <div class="col-sm-6 pl-0">
                                                 <p class="text-right">
                                                     <button type="submit" class="btn btn-space btn-success">Submit</button>
-                                                    <button class="btn btn-space btn-secondary">Cancel</button>
+                                                    <a href="{{route('home')}}" class="btn btn-space btn-secondary">Cancel</a>
                                                 </p>
                                             </div>
                                         </div>

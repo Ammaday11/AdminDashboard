@@ -115,7 +115,7 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{url('create-order')}}" class="btn btn-info">New Order</a>
+                                    <a href="{{route('create-order')}}" class="btn btn-info">New Order</a>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -128,10 +128,10 @@
                                                     <th>Time</th>
                                                     <th>Order Taker</th>
                                                     <th>Details</th>
-                                                    <th>Delivered By</th>
+                                                    {{-- <th>Delivered By</th>
                                                     <th>Delivered At</th>
                                                     <th>Cleared By</th>
-                                                    <th>Cleared At</th>
+                                                    <th>Cleared At</th> --}}
                                                     <th>Status</th>
                                                     <th>Actions</th>
                                                 </tr>
@@ -145,14 +145,15 @@
                                                     <td>{{$order->created_at}}</td>
                                                     <td>Order Taker</td>
                                                     <td>{{$order->Details}}</td>
-                                                    <td>DeliveredBy</td>
+                                                    {{-- <td>DeliveredBy</td>
                                                     <td>DeliveredAt</td>
                                                     <td>ClearedBy</td>
-                                                    <td>ClearedAt</td>
+                                                    <td>ClearedAt</td> --}}
                                                     <td>{{$order->Status}}</td>
                                                     <td>
-                                                        <a href="#" class="btn btn-info btn-sm m-r-10 fa fa-eye" data-toggle="modal" data-target="#exampleModal"></a>
-                                                        <a href="#" class="btn btn-brand btn-sm m-r-10 fas fa-edit" data-toggle="modal" data-target="#exampleModal"></a>
+                                                        <a href="{{ route('show-order', ['id' => $order->id]) }}" class="btn btn-info btn-sm m-r-10 fa fa-eye"></a>
+                                                        {{-- <a href="{{route('test')}}" class="btn btn-info btn-sm m-r-10 fa fa-eye"></a> --}}
+                                                        <a href="{{route('edit-order', ['id' => $order->id])}}" class="btn btn-brand btn-sm m-r-10 fas fa-edit" ></a>
                                                         <a href="#" class="btn btn-danger btn-sm m-r-10 fas fa-trash" data-toggle="modal" data-target="#exampleModal"></a>
                                                         
                                                     </td>

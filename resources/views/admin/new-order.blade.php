@@ -55,7 +55,8 @@
                                             <div class="col-sm-6 pl-0">
                                                 <p class="text-right">
                                                     <button type="submit" class="btn btn-space btn-success">Submit</button>
-                                                    <button class="btn btn-space btn-secondary">Cancel</button>
+                                                    <a href="{{route('home')}}" class="btn btn-space btn-secondary">Cancel</a>
+                                                    {{-- <button class="btn btn-space btn-secondary">Cancel</button> --}}
                                                 </p>
                                             </div>
                                         </div>

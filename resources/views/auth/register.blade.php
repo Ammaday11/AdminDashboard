@@ -8,8 +8,23 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="#" action="{{ route('register') }}">
+                    {{-- <form method="POST" action="{{ route('register') }}"> --}}
                         @csrf
+
+                        <div class="row mb-3">
+                            <label for="vmNo" class="col-md-4 col-form-label text-md-end">{{ __('VMNO') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="vmNo" type="text" class="form-control @error('vmNo') is-invalid @enderror" name="vmNo" value="{{ old('vmNo') }}" required autocomplete="vmNo" autofocus>
+
+                                @error('vmNo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
