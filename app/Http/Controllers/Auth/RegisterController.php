@@ -50,6 +50,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'vmNo' => 'required|string|max:255|unique:users,vmNo',
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
@@ -64,10 +65,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        dd($data);
+        $this->validator($data)->validate();
+
         return User::create([
+            'vmNo' => $data['vmNo'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        return redirect()->route('outlet.edit')->with('success', 'User created successfully.');
+    }
+
+    public function sign_up()
+    {
+        return view('User.sign-up');
     }
 }
