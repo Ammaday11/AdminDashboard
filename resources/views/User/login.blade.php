@@ -35,7 +35,8 @@
         <div class="card ">
             <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="../resources/assets/assets/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
             <div class="card-body">
-                <form>
+                <form action="{{ route('user.login') }}"  method="POST" enctype="multipart/form-data">
+                    @csrf
                     <div class="form-group">
                         <input class="form-control form-control-lg" id="vmno" type="text" placeholder="VM Number" autocomplete="off">
                     </div>
@@ -52,10 +53,10 @@
             </div>
             <div class="card-footer bg-white p-0  ">
                 <div class="card-footer-item card-footer-item-bordered">
-                    <a href="#" class="footer-link">Create An Account</a></div>
-                <div class="card-footer-item card-footer-item-bordered">
+                    <a href="{{ route('user.create') }}" class="footer-link">Create An Account</a></div>
+                {{-- <div class="card-footer-item card-footer-item-bordered">
                     <a href="#" class="footer-link">Forgot Password</a>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

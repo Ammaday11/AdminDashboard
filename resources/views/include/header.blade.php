@@ -16,7 +16,7 @@
                     <ul class="dropdown-menu dropdown-menu-right notification-dropdown">
                         <li>
                             <div class="notification-title"> Notification</div>
-                            <div class="list-header"> <a href="{{route('sign-up')}}">Register</a></div>
+                            <div class="list-header"> <a href="{{route('user.create')}}">Register</a></div>
                             <div class="notification-list">
                                 <div class="list-group">
                                     <a href="#" class="list-group-item list-group-item-action active">

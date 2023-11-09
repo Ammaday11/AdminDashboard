@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     OrdersController,
-    Auth\RegisterController,
+    UsersController,
 };
 /*
 |--------------------------------------------------------------------------
@@ -47,10 +47,12 @@ use App\Http\Controllers\{
 //Route::resource('orders', App\Http\Controllers\OrdersController::class);
 
 Route::get('/', [App\Http\Controllers\OrdersController::class, 'index'])->name('home');
+Route::get('/login', [App\Http\Controllers\UsersController::class, 'get_login'])->name('user.get_login');
+Route::post('/login', [App\Http\Controllers\UsersController::class, 'login'])->name('user.login');
 
 Route::get('/create-order', [App\Http\Controllers\OrdersController::class, 'create'])->name('create-order');
 Route::get('/edit-order/{id}', [App\Http\Controllers\OrdersController::class, 'edit'])->name('edit-order');
 Route::get('/show-order/{id}', [App\Http\Controllers\OrdersController::class, 'show'])->name('show-order');
 
-Route::get('/sign-up', [App\Http\Controllers\Auth\RegisterController::class, 'sign_up'])->name('sign-up');
-Route::post('/create-user', [App\Http\Controllers\Auth\RegisterController::class, 'create'])->name('create-user');
+Route::get('/user/create', [App\Http\Controllers\UsersController::class, 'create'])->name('user.create');
+Route::post('/user/store', [App\Http\Controllers\UsersController::class, 'store'])->name('user.store');

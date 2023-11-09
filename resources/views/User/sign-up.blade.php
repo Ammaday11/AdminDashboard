@@ -35,17 +35,17 @@
     <!-- ============================================================== -->
     <!-- signup form  -->
     <!-- ============================================================== -->
-    <form class="splash-container">
+    <form class="splash-container" action="{{ route('user.store') }}"  method="POST" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
                 <h3 class="mb-1">Registrations Form</h3>
                 <p>Please enter your user information.</p>
             </div>
-            <form action="{{ route('create-user') }}" id="new_user_form" method="POST" enctype="multipart/form-data">
+            {{-- <form action="{{ route('user.store') }}"  method="POST" enctype="multipart/form-data"> --}}
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
-                        <input class="form-control form-control-lg" type="text" name="vmNo" required="" placeholder="VM NO0000" autocomplete="off">
+                        <input class="form-control form-control-lg" type="text" name="vmNo" required="" placeholder="VM NO" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <input class="form-control form-control-lg" type="text" name="name" required="" placeholder="Name" autocomplete="off">
@@ -63,7 +63,7 @@
                         <button class="btn btn-block btn-primary" type="submit">Register My Account</button>
                     </div>
                 </div>
-            </form>
+            {{-- </form> --}}
             <div class="card-footer bg-white">
                 <p>Already member? <a href="#" class="text-secondary">Login Here.</a></p>
             </div>
