@@ -56,3 +56,5 @@ Route::get('/show-order/{id}', [App\Http\Controllers\OrdersController::class, 's
 
 Route::get('/user/create', [App\Http\Controllers\UsersController::class, 'create'])->name('user.create');
 Route::post('/user/store', [App\Http\Controllers\UsersController::class, 'store'])->name('user.store');
+
+Route::get('/logout', [App\Http\Controllers\UsersController::class, 'logout'])->name('user.logout');

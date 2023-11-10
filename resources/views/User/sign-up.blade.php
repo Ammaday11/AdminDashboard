@@ -35,13 +35,40 @@
     <!-- ============================================================== -->
     <!-- signup form  -->
     <!-- ============================================================== -->
+    
+            
+        
+    
     <form class="splash-container" action="{{ route('user.store') }}"  method="POST" enctype="multipart/form-data">
         <div class="card">
             <div class="card-header">
                 <h3 class="mb-1">Registrations Form</h3>
                 <p>Please enter your user information.</p>
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">{{$error}}
+                            <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </a> 
+                        </div>
+                    @endforeach
+                @endif
+                @if (session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">{{session('error')}}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </a> 
+                    </div>
+                @endif
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">{{session('success')}}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </a> 
+                    </div>
+                @endif
             </div>
-            {{-- <form action="{{ route('user.store') }}"  method="POST" enctype="multipart/form-data"> --}}
+            
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -57,18 +84,21 @@
                         <input class="form-control form-control-lg" id="password" name="password" type="password" required="" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <input class="form-control form-control-lg" required=""  placeholder="Confirm" type="password" >
+                        <input class="form-control form-control-lg" required="" name="password_confirmation" data-parsley-equalto="#password"  placeholder="Confirm Password" type="password" >
                     </div>
                     <div class="form-group pt-2">
                         <button class="btn btn-block btn-primary" type="submit">Register My Account</button>
                     </div>
                 </div>
-            {{-- </form> --}}
             <div class="card-footer bg-white">
-                <p>Already member? <a href="#" class="text-secondary">Login Here.</a></p>
+                <p>Already member? <a href="{{ route('user.get_login') }}" class="text-secondary">Login Here.</a></p>
             </div>
         </div>
     </form>
+
+    <script src="../resources/assets/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../resources/assets/assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="../resources/assets/assets/libs/js/main-js.js"></script>
 </body>
 
  

@@ -33,15 +33,42 @@
     <!-- ============================================================== -->
     <div class="splash-container">
         <div class="card ">
-            <div class="card-header text-center"><a href="../index.html"><img class="logo-img" src="../resources/assets/assets/images/logo.png" alt="logo"></a><span class="splash-description">Please enter your user information.</span></div>
+            <div class="card-header text-center">
+                <a href="#"><img class="logo-img" src="../resources/assets/assets/images/logo.png" alt="logo"></a>
+                <span class="splash-description">Please enter your user information.</span>
+                @if ($errors->any())
+                    @foreach ($errors->all() as $error)
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">{{$error}}
+                            <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </a> 
+                        </div>
+                    @endforeach
+                @endif
+                @if (session()->has('error'))
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">{{session('error')}}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </a> 
+                    </div>
+                @endif
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">{{session('success')}}
+                        <a href="#" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </a> 
+                    </div>
+                @endif
+            </div>
             <div class="card-body">
+                
                 <form action="{{ route('user.login') }}"  method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <input class="form-control form-control-lg" id="vmno" type="text" placeholder="VM Number" autocomplete="off">
+                        <input class="form-control form-control-lg" name="vmNo" id="vmNo" type="text" placeholder="VM Number" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <input class="form-control form-control-lg" id="password" type="password" placeholder="Password">
+                        <input class="form-control form-control-lg" name="password" id="password" type="password" placeholder="Password">
                     </div>
                     <div class="form-group">
                         <label class="custom-control custom-checkbox">

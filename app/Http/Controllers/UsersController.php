@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Session;
 
 class UsersController extends Controller
 {
@@ -18,7 +20,7 @@ class UsersController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             // 'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'password' => ['required', 'string', 'min:8'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
     }
 
@@ -32,13 +34,16 @@ class UsersController extends Controller
         // dd($data);
         $this->validator($data->all())->validate();
 
-        User::create([
+        $user = User::create([
             'vmNo' => $data['vmNo'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        return redirect()->route('home')->with('success', 'User created successfully.');
+        if(!$user){
+            return redirect()->route('user.create')->with('error', 'Registration failed, try again!');
+        }
+        return redirect()->route('user.get_login')->with('success', 'User created successfully!');
     }
 
     public function sign_up()
@@ -53,16 +58,21 @@ class UsersController extends Controller
 
     public function login(Request $data)
     {
-        dd($data);
-        $this->validator($data->all())->validate();
-
-        User::create([
-            'vmNo' => $data['vmNo'],
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+        $data->validate([
+            'vmNo' => 'required',
+            'password' => 'required',
+            
         ]);
-        return redirect()->route('home')->with('success', 'Login successfull.');
+        $credentials = $data->only('vmNo', 'password');
+        if(Auth::attempt($credentials)){
+            return redirect()->route('home');
+        }
+        return redirect()->route('user.get_login')->with('error', 'Invalid credentials!');
     }
     
+    public function logout(){
+        Session::flush();
+        Auth::logout();
+        return redirect()->route('user.get_login');
+    }
 }

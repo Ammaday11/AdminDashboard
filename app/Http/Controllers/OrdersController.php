@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use Illuminate\auth;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Status;
 
@@ -18,9 +20,10 @@ class OrdersController extends Controller
         foreach ($orders as $order) {
             $totalCovers += $order->Cover;
         }
-
+        $user = Auth::user();
+        
         //return view('home')->with('orders' , $orders)->with('totalCovers' , $totalCovers);
-        return view('home', compact('orders' ,'totalCovers'));
+        return view('home', compact('orders' ,'totalCovers', 'user'));
     }
 
     /**
