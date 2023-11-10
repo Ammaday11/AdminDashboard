@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Illuminate\auth;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Order;
 use App\Models\Status;
@@ -22,7 +21,6 @@ class OrdersController extends Controller
         }
         $user = Auth::user();
         
-        //return view('home')->with('orders' , $orders)->with('totalCovers' , $totalCovers);
         return view('home', compact('orders' ,'totalCovers', 'user'));
     }
 
@@ -51,8 +49,6 @@ class OrdersController extends Controller
     {
         $order = Order::find($id);
         return view('admin.show-order', compact('order'));
-        // $order = Order::where('id' , $id)->get();
-        // return view('admin.show-order')->with('order' , $order);
     }
     public function test()
     {
